@@ -2,23 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="profile.css">
 </head>
 <body>
-    <div class="main">
-        <div class="box">
+    <script>
+    $(document).ready(function()
+    {
+        
+
+        $.getJSON("profile_data.json",function(data){
+            for(i=0;i<data.length;i++)
+            {
+                console.log(i)
+
+                var item=data[i]
+
+                var card=`<div class="box">
             <div class="propic">
-                <img src="/profile/pic.jpg" alt="profile image">
+                <img alt="profile image" id="profileImageUrl" src=${item.profileImageUrl}>
             </div>
             <div class="details">
-                <h1>Mehul kadam</h1>
-                <h3>developer.mehul@gmail.com</h3>
-                <a href="">follower</a>
-                <a href="">+Follow</a>
+                <h1 id="name">${item.name}</h1>
+                <h3 id="email">${item.email}</h3>
+                <a href="" id="follower">${item.follower} Follower</a> &emsp; &emsp;
+                <button id="isFollowed">+Follow</a>
             </div>
-        </div>
+        </div>`;
+           $("#main").append(card);
+           
+        }});
+    });
+    </script>
+    <div class="main" id="main">
+       
     </div>   
 </body>
 </html>
